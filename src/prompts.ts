@@ -61,6 +61,24 @@ export async function promptTemplate(): Promise<Template> {
   return selectedTemplate;
 }
 
+export async function promptInitGit(): Promise<boolean> {
+  const initGit = await vimSelect<boolean>({
+    message: "Initialize a new git repository?",
+    choices: [
+      {
+        name: "Yes",
+        value: true,
+      },
+      {
+        name: "No",
+        value: false,
+      },
+    ],
+  });
+
+  return initGit;
+}
+
 async function promptCustomProjectName(): Promise<string> {
   const projectName = await input({
     message: "Enter a new project name:",

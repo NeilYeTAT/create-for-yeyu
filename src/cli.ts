@@ -3,6 +3,7 @@ import chalk from "chalk";
 import {
   promptProjectName,
   promptTemplate,
+  promptInitGit,
   resolveProjectName,
 } from "./prompts.js";
 import { getTemplateByValue, type Template } from "./templates.js";
@@ -35,7 +36,8 @@ async function executeTemplate(
       process.exit(1);
     }
 
-    await cloneRepo(template.repo, projectName);
+    const initGit = await promptInitGit();
+    await cloneRepo(template.repo, projectName, { initGit });
     printSuccessMessage(projectName);
   } else if (template.type === "vite") {
     await createViteProject(projectName);
