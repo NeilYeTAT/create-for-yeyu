@@ -1,6 +1,6 @@
 import degit from "degit";
 import path from "node:path";
-import { createSpinner } from "../utils/spinner.js";
+import { createTrainAnimation } from "../utils/train-animation.js";
 import { logger } from "../utils/logger.js";
 
 export async function cloneRepo(
@@ -8,9 +8,9 @@ export async function cloneRepo(
   projectName: string
 ): Promise<void> {
   const targetPath = path.resolve(process.cwd(), projectName);
-  const spinner = createSpinner(`Cloning template ${repo}...`);
+  const train = createTrainAnimation(`Cloning template ${repo}...`);
 
-  spinner.start();
+  train.start();
 
   try {
     const emitter = degit(repo, {
@@ -20,9 +20,9 @@ export async function cloneRepo(
     });
 
     await emitter.clone(targetPath);
-    spinner.succeed("Template cloned successfully!");
+    train.stop(true, "Template cloned successfully!");
   } catch (error) {
-    spinner.fail("Failed to clone template");
+    train.stop(false, "Failed to clone template");
     if (error instanceof Error) {
       logger.error(error.message);
     }
