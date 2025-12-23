@@ -1,14 +1,17 @@
 import { Command } from "commander";
 import chalk from "chalk";
-import fs from "fs-extra";
-import path from "node:path";
-import { promptProjectName, promptTemplate } from "./prompts.js";
+import {
+  promptProjectName,
+  promptTemplate,
+  resolveProjectName,
+} from "./prompts.js";
 import { getTemplateByValue, type Template } from "./templates.js";
 import { cloneRepo } from "./actions/clone-repo.js";
 import { createViteProject } from "./actions/create-vite.js";
 import { createNextProject } from "./actions/create-next.js";
 import { logger } from "./utils/logger.js";
 import { cowsay, getGreetingMessage } from "./utils/cowsay.js";
+import { removeDirectory } from "./utils/resolve-project-name.js";
 
 const VERSION = "1.0.0";
 
@@ -18,16 +21,15 @@ interface CLIOptions {
 
 async function executeTemplate(
   template: Template,
-  projectName: string
+  projectName: string,
+  shouldOverwrite: boolean
 ): Promise<void> {
-  const targetPath = path.resolve(process.cwd(), projectName);
+  if (shouldOverwrite) {
+    logger.info(`Removing existing directory ${projectName}...`);
+    await removeDirectory(projectName);
+  }
 
   if (template.type === "git") {
-    if (fs.existsSync(targetPath)) {
-      logger.error(`Directory ${projectName} already exists`);
-      process.exit(1);
-    }
-
     if (!template.repo) {
       logger.error("Template repository not configured");
       process.exit(1);
@@ -75,12 +77,15 @@ export async function run(): Promise<void> {
       printBanner();
 
       try {
-        let finalProjectName = projectName;
+        let inputProjectName = projectName;
         let template: Template;
 
-        if (!finalProjectName) {
-          finalProjectName = await promptProjectName();
+        if (!inputProjectName) {
+          inputProjectName = await promptProjectName();
         }
+
+        const { projectName: resolvedName, shouldOverwrite } =
+          await resolveProjectName(inputProjectName);
 
         if (options.template) {
           const foundTemplate = getTemplateByValue(options.template);
@@ -94,7 +99,7 @@ export async function run(): Promise<void> {
           template = await promptTemplate();
         }
 
-        await executeTemplate(template, finalProjectName);
+        await executeTemplate(template, resolvedName, shouldOverwrite);
       } catch (error) {
         if (error instanceof Error) {
           logger.error(error.message);
