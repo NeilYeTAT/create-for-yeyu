@@ -56,6 +56,56 @@ npx create-for-yeyu my-project --template vite
 npx create-for-yeyu my-project --template next
 ```
 
+### 常用选项
+
+```bash
+# 查看版本
+npx create-for-yeyu -v
+npx create-for-yeyu --version
+
+# 查看所有可用模板
+npx create-for-yeyu --list-templates
+
+# 使用默认值快速创建
+# 默认项目名: my-project
+# 默认模板: vite
+npx create-for-yeyu --yes
+
+# 目录已存在时直接覆盖
+npx create-for-yeyu my-project --template next --force
+
+# 关闭欢迎 Banner
+npx create-for-yeyu my-project --template vite --no-banner
+
+# Git 模板跳过 git 初始化
+npx create-for-yeyu my-project --template nest --no-git
+```
+
+### 更新 CLI
+
+```bash
+# 自动检测当前包管理器并更新到最新版本
+create-for-yeyu update
+
+# 指定包管理器更新
+create-for-yeyu update --manager pnpm
+create-for-yeyu update --manager npm
+```
+
+## 命令选项
+
+| 选项 | 说明 |
+| ---- | ---- |
+| `-v, --version` | 显示当前 CLI 版本 |
+| `-h, --help` | 显示帮助信息 |
+| `-t, --template <template>` | 指定模板 |
+| `-f, --force` | 目标目录已存在时直接覆盖 |
+| `-y, --yes` | 尽可能使用默认值，跳过交互 |
+| `--git` | Git 模板直接初始化仓库 |
+| `--no-git` | Git 模板跳过仓库初始化 |
+| `--list-templates` | 输出所有可用模板并退出 |
+| `--no-banner` | 不显示欢迎 Banner |
+
 ## 可用模板
 
 | 模板名称             | 命令参数       | 说明                  |
@@ -97,6 +147,9 @@ pnpm build
 
 # 本地测试运行
 pnpm start
+
+# 查看帮助
+pnpm start -- --help
 ```
 
 ## 项目结构
