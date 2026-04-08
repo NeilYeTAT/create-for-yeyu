@@ -1,5 +1,11 @@
 # create-for-yeyu
 
+## 3.2.1
+
+### Patch Changes
+
+- Fix the TypeScript 6 declaration build and update the related toolchain dependencies.
+
 ## 3.2.0
 
 ### Minor Changes
