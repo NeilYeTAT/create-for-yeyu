@@ -1,5 +1,11 @@
 # create-for-yeyu
 
+## 3.3.0
+
+### Minor Changes
+
+- Add self-update command and common CLI options
+
 ## 3.2.1
 
 ### Patch Changes
