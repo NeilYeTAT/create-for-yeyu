@@ -1,5 +1,11 @@
 # create-for-yeyu
 
+## 3.4.0
+
+### Minor Changes
+
+- Add Hono App Starter template
+
 ## 3.3.0
 
 ### Minor Changes

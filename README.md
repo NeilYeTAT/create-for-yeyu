@@ -49,6 +49,9 @@ npx create-for-yeyu my-project --template next-web-app
 # 使用 EVM DApp 模板
 npx create-for-yeyu my-project --template evm-dapp
 
+# 使用 Hono App 模板
+npx create-for-yeyu my-project --template hono
+
 # 使用 Vite 创建项目
 npx create-for-yeyu my-project --template vite
 
@@ -113,6 +116,7 @@ create-for-yeyu update --manager npm
 | NestJS Starter       | `nest`         | NestJS 应用启动模板   |
 | Next Web App Starter | `next-web-app` | Next Web App 启动模板 |
 | EVM DApp Starter     | `evm-dapp`     | EVM DApp 启动模板     |
+| Hono App Starter     | `hono`         | Hono 应用启动模板     |
 | Vite                 | `vite`         | 使用 Vite 官方模板    |
 | Next.js              | `next`         | 使用 Create Next App  |
 

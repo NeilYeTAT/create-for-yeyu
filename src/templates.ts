@@ -29,6 +29,13 @@ export const templates: Template[] = [
     repo: "for-yeyu/evm-dapp-starter-for-yeyu",
   },
   {
+    name: "Hono App Starter",
+    value: "hono",
+    description: "Hono application starter template",
+    type: "git",
+    repo: "for-yeyu/hono-app-starter-for-yeyu",
+  },
+  {
     name: "Vite",
     value: "vite",
     description: "Create project with Vite official template",
